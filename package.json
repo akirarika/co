@@ -3,7 +3,7 @@
   "private": true,
   "module": "index.ts",
   "scripts": {
-    "dev": "cd packages/co && bun run index.ts",
+    "co": "cd packages/co && bun run index.ts",
     "publish": "bun run .publish.ts"
   },
   "workspaces": [
