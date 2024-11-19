@@ -1,5 +1,3 @@
-# 🥵 Never Worry About Which Package Manager to Use Again!
-
 English | [中文](./README_ZH.md)
 
 ## Installation
