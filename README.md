@@ -1,6 +1,6 @@
 # 🥵 Never Worry About Which Package Manager to Use Again!
 
-(English)[./README.md](README.md) | 中文
+English| [中文](./README_ZH.md)
 
 co - **🥵 Never Worry About Which Package Manager to Use Again!**
 

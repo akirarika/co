@@ -1,6 +1,6 @@
 # 🥵 再也别想该用啥包管理器了！
 
-(English)[./README.md](README.md) | 中文
+[English](README.md) | 中文
 
 co - **🥵 再也别想该用啥包管理器了！**
 
