@@ -14,7 +14,7 @@ npm create co
 
 You can use any package manager you like to install `co`. This is the simplest method.
 
-co - **🥵 Never Worry About Which Package Manager to Use Again!**
+## 🥵 Never Worry About Which Package Manager to Use Again!
 
 In the JavaScript community, there are many package managers, such as `npm`, `bun`, `yarn`, `pnpm`, `cnpm`, and so on...
 
