@@ -10,7 +10,7 @@ bun create co
 npm create co
 ```
 
-You can use any package manager you like to install `co`. This is the simplest method. The reason why it is not installed by'npm i -g co 'is because'co' is essentially a single-file executable, and we download the version suitable for your system and CPU by running a piece of JavaScript code
+You can use any package manager you prefer to install `co`, which is the simplest method. The reason we don't install it with `npm i -g co` is that `co` is essentially a single-file executable. Instead, we download a version of `co` that is suitable for your system and CPU architecture by running a piece of JavaScript code.
 
 ## 🥵 Never Worry About Which Package Manager to Use Again!
 
