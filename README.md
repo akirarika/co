@@ -20,8 +20,6 @@ Before installing a package in different projects, you first need to recall the 
 
 Due to muscle memory, I often habitually run `npm i` wrongly in those `yarn`, `pnpm`, `bun` projects. This feeling is really painful...
 
-To solve this problem, I wrote `co`. You can execute commands of different package managers freely according to different projects through a set of identical commands.
-
 ## Scripts
 
 Behind achieving such magic is the scripting functionality of `co`, just like the `scripts` in `package.json` of `npm`.
@@ -89,6 +87,8 @@ You can read this [Alias List](./ALIAS_LIST.md) to understand what aliases are p
 
 ## Scripts
 
+> Before using it, you need to install Bun first.
+
 When there is a `.ts` file in the `.commands` directory under your project, you can run it directly using `co`.
 
 In addition, you can also write some scripts in the global scope and place them in the `~/.commands` directory. `co` can also recognize and run them.
@@ -97,17 +97,14 @@ For example, we write a greeting script and save it as `hello.ts`:
 
 ```ts
 import { $ } from "bun";
+import { argv } from "node:process";
 
-self.addEventListener("message", async (event: MessageEvent) => {
-  // Some command line parameter information passed when using
-  console.log(event.data);
+// Some command line parameter information passed when using
+const commands = JSON.parse(argv[2]);
+console.log(commands);
 
-  // Run shell commands. Even if Bun is not installed, the complete Bun API can be used.
-  await $`echo hello world`;
-
-  // Send an exit message to close the process after running is completed.
-  postMessage("exit");
-});
+// Run shell commands. Even if Bun is not installed, the complete Bun API can be used.
+await $`echo hello world`;
 ```
 
 Among them, we can obtain the user's parameters. For example, when executing:
@@ -116,7 +113,7 @@ Among them, we can obtain the user's parameters. For example, when executing:
 co hello world -foo -bar=baz
 ```
 
-The following information can be obtained in `event.data`:
+The following information can be obtained in `JSON.parse(argv[2])`:
 
 ```ts
 {

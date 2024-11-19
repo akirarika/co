@@ -15,15 +15,15 @@ await $`bun i`.cwd(join(process.cwd(), "packages", "create-co"));
 
 await $`rm -rf ./dist`.cwd(join(process.cwd(), "packages", "co"));
 // windows x64
-await $`${{ raw: `bun build --minify --sourcemap=inline --compile --target=bun-windows-x64-baseline ./index.ts --outfile ./dist/co-win32-x64/co.exe` }}`.cwd(join(process.cwd(), "packages", "co"));
+await $`${{ raw: `bun build --sourcemap=inline --compile --target=bun-windows-x64-baseline ./index.ts --outfile ./dist/co-win32-x64/co.exe` }}`.cwd(join(process.cwd(), "packages", "co"));
 // linux x64
-await $`${{ raw: `bun build --minify --sourcemap=inline --compile --target=bun-linux-x64-baseline ./index.ts --outfile ./dist/co-linux-x64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
+await $`${{ raw: `bun build --sourcemap=inline --compile --target=bun-linux-x64-baseline ./index.ts --outfile ./dist/co-linux-x64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
 // linux arm64
-await $`${{ raw: `bun build --minify --sourcemap=inline --compile --target=bun-linux-arm64-baseline ./index.ts --outfile ./dist/co-linux-arm64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
+await $`${{ raw: `bun build --sourcemap=inline --compile --target=bun-linux-arm64-baseline ./index.ts --outfile ./dist/co-linux-arm64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
 // darwin x64
-await $`${{ raw: `bun build --minify --sourcemap=inline --compile --target=bun-darwin-x64 ./index.ts --outfile ./dist/co-darwin-x64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
+await $`${{ raw: `bun build --sourcemap=inline --compile --target=bun-darwin-x64 ./index.ts --outfile ./dist/co-darwin-x64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
 // darwin arm64
-await $`${{ raw: `bun build --minify --sourcemap=inline --compile --target=bun-darwin-arm64 ./index.ts --outfile ./dist/co-darwin-arm64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
+await $`${{ raw: `bun build --sourcemap=inline --compile --target=bun-darwin-arm64 ./index.ts --outfile ./dist/co-darwin-arm64/co` }}`.cwd(join(process.cwd(), "packages", "co"));
 
 writeFile(join(process.cwd(), "packages", "co", "dist", "co-darwin-arm64", "package.json"), JSON.stringify({ ...packageJson, name: `co-darwin-arm64` }, null, 2));
 writeFile(join(process.cwd(), "packages", "co", "dist", "co-darwin-x64", "package.json"), JSON.stringify({ ...packageJson, name: `co-darwin-x64` }, null, 2));

@@ -1,7 +1,7 @@
 {
   "name": "create-co",
   "module": "index.ts",
-  "version": "6.0.0",
+  "version": "6.0.5",
   "type": "module",
   "bin": {
     "create-co": "./index.mjs"

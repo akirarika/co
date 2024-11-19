@@ -2,6 +2,7 @@ import { cwd, exit } from "node:process";
 import type { Params } from "../types";
 import consola from "consola";
 import { $ } from "bun";
+import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 import { init } from "../commands/init";
 import { exists } from "node:fs/promises";
@@ -32,18 +33,21 @@ export async function run(params: Params, options: { path?: string; hint?: "glob
 
     exit(0);
   } else {
-    await new Promise(async (resolve) => {
-      const worker = new Worker(options.path!);
-      worker.onerror = (event) => {
-        console.error(event.message);
-        if (event.error) consola.error(event.error);
-        exit(1);
-      };
-      worker.onmessage = (event) => {
-        if (event.data === "exit") exit(0);
-        resolve(undefined);
-      };
-      worker.postMessage(params);
-    });
+    // await new Promise(async (resolve) => {
+    //   const worker = new Worker(options.path!);
+    //   worker.onerror = (event) => {
+    //     console.error(event.message);
+    //     if (event.error) consola.error(event.error);
+    //     exit(1);
+    //   };
+    //   worker.onmessage = (event) => {
+    //     if (event.data === "exit") exit(0);
+    //     resolve(undefined);
+    //   };
+    //   worker.postMessage(params);
+    // });
+
+    execFileSync("bun", ["run", options.path!, JSON.stringify(params)], { stdio: "inherit" });
+    exit(0);
   }
 }
