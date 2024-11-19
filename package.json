@@ -1,0 +1,19 @@
+{
+  "name": "co",
+  "private": true,
+  "module": "index.ts",
+  "scripts": {
+    "dev": "cd packages/co && bun run index.ts",
+    "publish": "bun run .publish.ts"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

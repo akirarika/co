@@ -1,0 +1,19 @@
+{
+  "name": "co",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "hello": "echo world"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "version": "6.0.0",
+  "dependencies": {
+    "consola": "^3.2.3",
+    "gradient-string": "^3.0.0"
+  }
+}
