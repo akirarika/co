@@ -2,6 +2,18 @@
 
 English | [中文](./README_ZH.md)
 
+## Installation
+
+```bash
+bun create co
+```
+
+```bash
+npm create co
+```
+
+You can use any package manager you like to install `co`. This is the simplest method.
+
 co - **🥵 Never Worry About Which Package Manager to Use Again!**
 
 In the JavaScript community, there are many package managers, such as `npm`, `bun`, `yarn`, `pnpm`, `cnpm`, and so on...
@@ -37,18 +49,6 @@ Even if Bun is not installed in your system, you can execute commands in this wa
 `co` creates a `.commands` directory in the root directory of your project to remember the package manager you are using. In this way, regardless of whether there are lock files in your project or what kind of lock files there are, `co` can correctly select the package manager you expect to use.
 
 At the same time, any `.ts` file created under `.commands` will become a script of `co`, and you can run it directly by using `co filename`. We can place some build, package, and release scripts shared among the team here, so that anyone can run them conveniently and without coupling with other projects.
-
-## Installation
-
-```bash
-bun create co
-```
-
-```bash
-npm create co
-```
-
-You can use any package manager you like to install `co`. This is the simplest method.
 
 ## Usage
 
