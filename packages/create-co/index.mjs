@@ -85,11 +85,15 @@ const utils = {
         exit(0);
       }
       if (!existsSync(pathChecked)) mkdirSync(pathChecked);
-      if (pathChecked.startsWith("/home")) await utils.executeBash(`rm -f ${join(pathChecked, filename)} && mv ${join(workspace, filename)} ${pathChecked} && chmod +x ${join(pathChecked, filename)} && rm -rf ${join(tempspace)}`);
-      else await utils.executeBash(`sudo rm -f ${join(pathChecked, filename)} && sudo mv ${join(workspace, filename)} ${pathChecked} && sudo chmod +x ${join(pathChecked, filename)} && sudo rm -rf ${join(tempspace)}`);
+      if (existsSync(join(pathChecked, filename))) {
+        if (pathChecked.startsWith("/home")) await utils.executeBash(`rm -f ${join(pathChecked, filename)}`);
+        else await utils.executeBash(`sudo rm -f ${join(pathChecked, filename)}`);
+      }
+      if (pathChecked.startsWith("/home")) await utils.executeBash(`mv ${join(workspace, filename)} ${pathChecked} && chmod +x ${join(pathChecked, filename)} && rm -rf ${join(tempspace)}`);
+      else await utils.executeBash(`sudo mv ${join(workspace, filename)} ${pathChecked} && sudo chmod +x ${join(pathChecked, filename)} && sudo rm -rf ${join(tempspace)}`);
     }
     if (process.platform === "darwin") {
-      const paths = [join(process.env.HOME, ".bin"), "/usr/bin/", "/usr/sbin"];
+      const paths = [join(process.env.HOME, "bin"), join(process.env.HOME, ".bin"), join(process.env.HOME, ".local", "bin"), "/usr/local/bin"];
       let pathChecked = "";
       for (const path of paths) {
         if (process.env.PATH.includes(`${path}:`) || process.env.PATH.includes(`:${path}`) || process.env.PATH === `${path}`) {
@@ -102,8 +106,12 @@ const utils = {
         exit(0);
       }
       if (!existsSync(pathChecked)) mkdirSync(pathChecked);
-      if (pathChecked.startsWith("/Users")) await utils.executeBash(`rm -f ${join(pathChecked, filename)} && mv ${join(workspace, filename)} ${pathChecked} && chmod +x ${join(pathChecked, filename)} && rm -rf ${join(tempspace)}`);
-      else await utils.executeBash(`sudo rm -f ${join(pathChecked, filename)} && sudo mv ${join(workspace, filename)} ${pathChecked} && sudo chmod +x ${join(pathChecked, filename)} && sudo rm -rf ${join(tempspace)}`);
+      if (existsSync(join(pathChecked, filename))) {
+        if (pathChecked.startsWith("/Users")) await utils.executeBash(`rm -f ${join(pathChecked, filename)}`);
+        else await utils.executeBash(`sudo rm -f ${join(pathChecked, filename)}`);
+      }
+      if (pathChecked.startsWith("/Users")) await utils.executeBash(`mv ${join(workspace, filename)} ${pathChecked} && chmod +x ${join(pathChecked, filename)} && rm -rf ${join(tempspace)}`);
+      else await utils.executeBash(`sudo mv ${join(workspace, filename)} ${pathChecked} && sudo chmod +x ${join(pathChecked, filename)} && sudo rm -rf ${join(tempspace)}`);
     }
   },
   executePowershell: async (script) => {

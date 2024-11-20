@@ -1,7 +1,6 @@
 import { cwd, exit } from "node:process";
 import type { Params } from "../types";
 import consola from "consola";
-import { $ } from "bun";
 import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 import { init } from "../commands/init";
@@ -11,43 +10,40 @@ export async function run(params: Params, options: { path?: string; hint?: "glob
   if (options.hint === "npm-script") {
     if (!(await exists(join(cwd(), ".commands", "__CONFIG__.toml")))) await init(params);
     const config: any = Bun.TOML.parse(await Bun.file(join(cwd(), ".commands", "__CONFIG__.toml")).text());
-    if (config.general.packageManager === "bun") {
-      await $`bun run ${options.path} ${params.raw.join(" ")}`;
-    }
 
-    if (config.general.packageManager === "npm") {
-      await $`npm run ${options.path} ${params.raw.join(" ")}`;
-    }
+    try {
+      if (config.general.packageManager === "bun") {
+        execFileSync("bun", ["run", options.path!, ...params.raw], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      }
 
-    if (config.general.packageManager === "cnpm") {
-      await $`cnpm run ${options.path} ${params.raw.join(" ")}`;
-    }
+      if (config.general.packageManager === "npm") {
+        execFileSync("npm", ["run", options.path!, ...params.raw], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      }
 
-    if (config.general.packageManager === "yarn") {
-      await $`yarn run ${options.path} ${params.raw.join(" ")}`;
-    }
+      if (config.general.packageManager === "cnpm") {
+        execFileSync("cnpm", ["run", options.path!, ...params.raw], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      }
 
-    if (config.general.packageManager === "pnpm") {
-      await $`pnpm run ${options.path} ${params.raw.join(" ")}`;
-    }
+      if (config.general.packageManager === "yarn") {
+        execFileSync("yarn", ["run", options.path!, ...params.raw], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      }
 
-    exit(0);
+      if (config.general.packageManager === "pnpm") {
+        execFileSync("pnpm", ["run", options.path!, ...params.raw], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      }
+
+      exit(0);
+    } catch (error: any) {
+      consola.error(error?.message ?? "Running Error");
+      exit(1);
+    }
   } else {
-    // await new Promise(async (resolve) => {
-    //   const worker = new Worker(options.path!);
-    //   worker.onerror = (event) => {
-    //     console.error(event.message);
-    //     if (event.error) consola.error(event.error);
-    //     exit(1);
-    //   };
-    //   worker.onmessage = (event) => {
-    //     if (event.data === "exit") exit(0);
-    //     resolve(undefined);
-    //   };
-    //   worker.postMessage(params);
-    // });
-
-    execFileSync("bun", ["run", options.path!, JSON.stringify(params)], { stdio: "inherit" });
-    exit(0);
+    try {
+      execFileSync("bun", ["run", options.path!, JSON.stringify(params)], { stdio: "inherit", shell: true, env: { TERM: "xterm-256color", ...process.env } });
+      exit(0);
+    } catch (error: any) {
+      consola.error(error?.message ?? "Running Error");
+      exit(1);
+    }
   }
 }
