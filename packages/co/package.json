@@ -2,9 +2,7 @@
   "name": "co",
   "module": "index.ts",
   "type": "module",
-  "scripts": {
-    "hello": "echo world"
-  },
+  "scripts": {},
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -13,6 +11,7 @@
   },
   "version": "6.0.15",
   "dependencies": {
+    "@inquirer/prompts": "^7.1.0",
     "consola": "^3.2.3",
     "gradient-string": "^3.0.0"
   }
